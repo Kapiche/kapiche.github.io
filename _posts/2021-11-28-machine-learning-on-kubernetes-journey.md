@@ -1,11 +1,10 @@
 ---
 layout: post
 title: "Machine Learning on Kubernetes Journey"
-description: "Implementing Brotli compression and Elliptic Curve Cryptography with Nginx"
+description: "Kapiche's journey so far with Kubeflow and Machine Learning"
 category: "Security"
 author: cam_parry
-tags: [Devops, Docker, Security, Docker Compose]
-comments: true
+tags: [MLOps, Machine Learning, Kubeflow]
 share: true
 ---
 
