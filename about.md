@@ -1,8 +1,8 @@
 ---
 layout: page
 permalink: /about/index.html
-title: Redfog
-tags: [Redfog, engineering]
+title: Kapiche Engineering
+tags: [Kapiche, engineering]
 chart: true
 ---
 
@@ -21,5 +21,5 @@ chart: true
     {% endif %}
 {% endfor %}
 
-Welcome to the Redfog Blog. Here we write about our learning and experimentations with
+Welcome to the Kapiche Engineering Blog. Here we write about our learning and experimentations with
 new technologies. We welcome any feedback you have.

@@ -92,7 +92,7 @@ Blog maintainers will review posts for:
 
 * Ensuring the post relates to the subject matter of the blog
 * Client confidential information
-* Anything which might put Redfog in a bad light
+* Anything which might put Kapiche in a bad light
 * Glaring grammatical/spelling errors
 
 They will not:
