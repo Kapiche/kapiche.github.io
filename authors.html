@@ -1,0 +1,88 @@
+---
+layout: page
+permalink: /authors/index.html
+title: Meet our bloggers
+tags: [Redfog, engineering]
+chart: true
+---
+
+{% assign authors = site.data.authors %}
+{% assign rownum = 1 %}
+
+{% for authorloop in authors %}
+  {% assign author = authorloop[1] %}
+  {% unless author.ex %}
+    {% assign posts_by_author = "" | split: ""  %}
+
+    {% for post in site.posts %}
+      {% assign post_author = site.data.authors[post.author] %}
+      {% if post_author.name == author.name %}
+        {% assign posts_by_author = posts_by_author | push: post %}
+      {% endif %}
+    {% endfor %}
+
+    {% if posts_by_author.size > 0 %}
+      {% capture rownum %}
+        {% increment rownum %}
+      {% endcapture %}
+      {% assign mod = rownum | modulo:2 %}
+      {% if (mod) == 1 %}
+        {% assign rowstyle = 'odd' %}
+      {% else %}
+        {% assign rowstyle = 'even' %}
+      {% endif %}
+      <div class="notepad-author-info row-{{ rowstyle }}" id="author-{{ author.name | slugify }}">
+        <div class="row">
+          <section class="notepad-post-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+            {% include author-info.html %}
+          </section>
+
+          <div>
+            <ul class="post-list">
+              {% for post in posts_by_author %}
+                <li>
+                  <a href="{{ post.url }}">
+                    {{ post.title }}
+                    <span class="entry-date">
+                      <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%B %-d, %Y" }}</time>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+                <li>
+                  <a href="https://capgemini.github.io/devops/transparency-of-things/" class="post-link">
+                    <span class="post-title">
+                      Transparency of Things
+                    </span>
+                    <span class="entry-date">
+                      <time datetime="2016-04-08T00:00:00+01:00" itemprop="datePublished">April 8, 2016</time>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://capgemini.github.io/devops/docker-ci-workflows/" class="post-link">
+                    <span class="post-title">
+                      Docker Continuous Delivery Workflows
+                    </span>
+                    <span class="entry-date">
+                      <time datetime="2016-01-26T00:00:00+00:00" itemprop="datePublished">January 26, 2016</time>
+                    </span>
+                  </a>
+                </li>  
+                <li>
+                  <a href="https://capgemini.github.io/open%20source/continuously-deploying-apollo/" class="post-link">
+                    <span class="post-title">
+                      Continuously deploying Apollo with Wercker
+                    </span>
+                    <span class="entry-date">
+                      <time datetime="2015-07-03T00:00:00+01:00" itemprop="datePublished">July 3, 2015</time>
+                    </span>
+                  </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endunless %}
+{% endfor %}

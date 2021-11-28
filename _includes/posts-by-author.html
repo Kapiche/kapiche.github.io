@@ -1,0 +1,55 @@
+{% assign posts_by_author = "" | split: ""  %}
+{% for post in site.posts %}
+  {% for postauthor in post.author %}
+    {% assign post_author = site.data.authors[postauthor] %}
+    {% if (post_author.name == author.name) %}
+      {% assign posts_by_author = posts_by_author | push: post %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+  
+{% if posts_by_author.size > 1 %}
+<div class="row posts-by-author">
+  <div class="columns">
+    {% assign name = author.name | split: ' ' %}
+    <h3>Other posts by {{ name.first  }}</h3>
+    <ul class="post-list">
+      {% for post in posts_by_author %}
+        {% unless page.url == post.url %}
+          {% include post-listing.html %}
+        {% endunless %}
+      {% endfor %}
+      <li>
+        <a href="https://capgemini.github.io/devops/transparency-of-things/" class="post-link">
+          <span class="post-title">
+            Transparency of Things
+          </span>
+          <span class="entry-date">
+            <time datetime="2016-04-08T00:00:00+01:00" itemprop="datePublished">April 8, 2016</time>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="https://capgemini.github.io/devops/docker-ci-workflows/" class="post-link">
+          <span class="post-title">
+            Docker Continuous Delivery Workflows
+          </span>
+          <span class="entry-date">
+            <time datetime="2016-01-26T00:00:00+00:00" itemprop="datePublished">January 26, 2016</time>
+          </span>
+        </a>
+      </li>  
+      <li>
+        <a href="https://capgemini.github.io/open%20source/continuously-deploying-apollo/" class="post-link">
+          <span class="post-title">
+            Continuously deploying Apollo with Wercker
+          </span>
+          <span class="entry-date">
+            <time datetime="2015-07-03T00:00:00+01:00" itemprop="datePublished">July 3, 2015</time>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endif %}

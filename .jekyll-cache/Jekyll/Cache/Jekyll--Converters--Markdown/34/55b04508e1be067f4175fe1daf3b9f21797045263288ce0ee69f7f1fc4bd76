@@ -1,0 +1,89 @@
+I"�"<p>So I am going to test out Googles new <a href="https://github.com/google/brotli">Brotli</a> compression and while I’m at it show you how to configure nginx with some basic defaults, as well as show you how to use <a href="https://en.wikipedia.org/wiki/Elliptic_curve_cryptography">Elliptic curve cryptography</a>, as an alternative to RSA. I will be doing this with Nginx compiled with <a href="https://www.chromium.org/Home/chromium-security/boringssl">BoringSSL</a> using the awesome work done by Wonderwall - <a href="https://hub.docker.com/r/wonderfall/boring-nginx/">BoringNginx Container</a>.</p>
+
+<p>All source code examples for this are here https://github.com/wallies/nginx-ssl-experiments and demo can be seen here ssldemo.redfog.io</p>
+
+<p>I are going to do this locally first using docker compose. So first we have to generate a self signed certificate but we can’t just do this the standard way as we want to generate a <a href="https://en.wikipedia.org/wiki/Elliptic_curve_cryptography">Elliptic curve cryptography</a> certificate. I am not going to touch on the issue of ECC vs RSA as that is already covered in depth before.
+Now we are going to use OpenSSL 1.1.0 which has changed syntax a bit and also because it supports ChaCha20 and Poly1305 ciphers. SSL Cipher suites were obtained from <a href="https://wiki.mozilla.org/Security/Server_Side_TLS">Mozilla Security/Server Side TLS</a>. I have prebuilt the source into a container <a href="https://hub.docker.com/r/wallies/openssl/">here</a>, so we can utilise new openssl ciphers and features.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm -it --name openssl wallies/openssl openssl ecparam -list_curves
+
+docker run --rm -it --name openssl -v $(pwd)/certs:/certs wallies/openssl openssl ecparam -out /certs/ec_key.pem -name secp384r1 -noout -genkey
+
+docker run --rm -it --name openssl -v $(pwd)/certs:/certs -e ALT_NAME="DNS:pagekite.me,DNS:ssldemo.pagekite.me" wallies/openssl openssl req -new -key /certs/ec_key.pem -sha256 -nodes -outform pem -reqexts SAN -subj "/C=UK/ST=London/L=London/O=pagekite/OU=IT/CN=pagekite.me" -out /certs/ecc.csr
+
+docker run --rm -it --name openssl -v $(pwd)/certs:/certs wallies/openssl openssl req -x509 -sha256 -days 365 -key /certs/ec_key.pem -in /certs/ecc.csr -subj "/C=UK/ST=London/L=London/O=xip/OU=IT/CN=pagekite.me" -out /certs/ecc_cert.pem
+</code></pre></div></div>
+
+<p>This will create an Elliptic curve cryptography certificate private key, signing request and then use the letsencrypt client to create a valid certificate.</p>
+
+<p>I decided to use Elliptic curve Diffie-Hellman (ECDH) as it is a key agreement protocol allowing two parties, each having an elliptic curve public-private key pair, to establish a shared secret over an insecure channel. I was then going to use ssl ecdh curve secp521r1, as on one hand secp384r1 is a 384 bit Elliptic curve which most efficiently supports ssl_ciphers up to a SHA-384 hash and is compatible with all desktop and mobile clients. Using a larger hash value, like secp521r1, and then truncating down to 384 or 256 wastes around one(1) millisecond of extra cpu time. On the other hand, we are using secp521r1 due to its more difficult cracking potential and the fact that older OS’s like XP can not solve the equation; i.e. those old compromised machines can not connect to us. Currently letsencrypt do not support the secp521r1 curve, so for now we will stick with secp384r1.
+Take a look at the NSA’s paper titled, <a href="http://www.smithandcrown.com/open-research/the-case-for-elliptic-curve-cryptography/">The Case for Elliptic Curve Cryptography</a> for more details.</p>
+
+<p>For turning on Brotli compression we simply add the following to our nginx.conf file.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brotli on;
+brotli_static on;
+brotli_buffers 16 8k;
+brotli_comp_level 6;
+brotli_types
+  text/css
+  text/javascript
+  text/xml
+  text/plain
+  text/x-component
+  application/javascript
+  application/x-javascript
+  application/json
+  application/xml
+  application/rss+xml
+  application/vnd.ms-fontobject
+  font/truetype
+  font/opentype
+  image/svg+xml;
+</code></pre></div></div>
+
+<p>In terms of Brotli compression level, there is a clear win enabling brotli level 1 if you had gzip level 1 enabled or brotli level 5 if you were comfortable with the CPU cost of gzip level 9 on dynamic assets and have capacity and can expect a 5-10% win size. 
+On the other hand if you just have static assets you can compress these ahead of time by just using brotli cli e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bro --input css/styles.css --output dist/css/styles.css.br
+</code></pre></div></div>
+
+<p>When testing Brotli in your browser we are looking for the ‘<strong>Accept-Encoding</strong>’ header under the Request headers section, as this is the browser signalling to the server what kinds of compressed content it can decompress with, so we are looking for “ <strong>Accept-Encoding: ‘gzip, deflate, br’</strong> “.</p>
+
+<p>We then start up our docker compose dev setup, expose it using ngrok or pagekite and test against https://www.htbridge.com/websec/. This will just test our Nginx Server configuration. I tried to expose through ngrok or pagekite so I could try and use letsencrypt via a tunnel but it wasn’t working, so have decided all I need to really do is validate my server configuration. You will notice we are using docker-compose with overrides here, which I find useful if using docker-compose for different environments or different test cases with a shared base configuration. I have also added the seccomp security option to the prod docker-compose file, which is just a copy of the default one which is used by docker, but it does show what the defaults you are getting.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### Start dev setup
+docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d
+
+### Expose service to internet
+docker run -it --rm --net host --name pagekite wattos/docker-pagekite 443 https://ssldemos.pagekite.me:443
+</code></pre></div></div>
+
+<p>Now that we have confirmed the browser supports the brotli encoding, we must confirm that the server supports the compression as well, so we will look at the ‘<strong>Content-Encoding</strong>’ header under the Response headers section. We should see “ <strong>Content-Encoding: ‘br’</strong> “ , as this is what we turned on for nginx which is serving our application.</p>
+
+<p>Now that we have tested everything is working locally, we can set it up on a live server. 
+We run the below script, which will setup our letsencypt certificate using our previously generated key and signing request. It will then use docker-machine to startup a server on digital ocean, you can change this by using a different docker-machine driver. It will then grab the docker environment variables for that machine so we can run docker-compose against it.  Now we can run our application up and run a full test against <a href="https://www.ssllabs.com/ssltest/">SSL Labs test</a> or <a href="https://www.htbridge.com/ssl/">Free SSL Server Test</a>.</p>
+
+<h3 id="live">Live</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You will need to export two variables first to talk to digital ocean and then to get the right domain name e.g.
+
+export DOTOKEN=your-api-token
+export DOMAIN=dns-domain
+
+sh docker-machine.sh
+</code></pre></div></div>
+
+<p>If you are after best current practices regarding configuration of cyptographic tools and online communication, head to <a href="https://bettercrypto.org/">Better Crypto</a>.</p>
+
+<h3 id="references">References</h3>
+<ul>
+  <li><a href="https://mark911.wordpress.com/2015/01/10/how-to-compile-and-install-newest-version-of-openssl-in-ubuntu-14-04-lts-64-bit-via-github/">Compile the newest version of OpenSSL</a></li>
+  <li><a href="https://hub.docker.com/r/wonderfall/boring-nginx/">Docker nginx image complied with boringssl</a></li>
+  <li><a href="https://calomel.org/nginx.html">Secure nginx with SSL &amp; Building BoringSSL with Nginx</a></li>
+  <li><a href="https://boops.me/how-to-get-a-signed-ecdsa-ecc-cert-from-letsencrypt/">ECDSA Certs from LetsEncrypt</a></li>
+  <li><a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">Mozilla Configurator Generator</a></li>
+  <li><a href="https://security.googleblog.com/2016/07/experimenting-with-post-quantum.html">Experimenting with Post-Quantum Cryptography</a></li>
+  <li><a href="https://www.microsoft.com/en-us/research/project/sidh-library/">Microsofts answer to post quantum cryptography</a></li>
+</ul>
+:ET
