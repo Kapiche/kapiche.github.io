@@ -104,7 +104,7 @@ They will not:
 
 [Instructions for installing Jekyll](http://jekyllrb.com/docs/installation/) (If you're running Windows, see the special section just for you below)
 
-You can preview your changes by running jekyll serve --watch which will generate the site and run it at http://localhost:4000
+You can preview your changes by running jekyll serve --watch which will generate the site and run it at http://localhost:5000
 
 ## Code improvements
 
