@@ -18,7 +18,7 @@ gcloud container node-pools create gpu-burst-pool --cluster=botanic --zone us-ce
 ```
 
 Now we have a node pool, we deploy our application and run some tests to get some load against it. For our application we can see the profile of the application below. 
-![Application Profile](./images/app-profile-for-scaling.png)
+![Application Profile](../images/app-profile-for-scaling.png)
 We can see based on this, we should either scale based on CPU or GPU cycles. If we google, we can see some articles around scaling based on GPU cycles for Batch Machine learning applications, so this might be something to investigate. GPU cycle is not a normal metric to autoscale, on and in this article [https://medium.com/deepdesk/scaling-workloads-based-on-gpu-utilization-in-gke-e852a8e47b4](https://medium.com/deepdesk/scaling-workloads-based-on-gpu-utilization-in-gke-e852a8e47b4), it goes through how we have to install the GKE metrics adapater in order for the GPU cycle custom metric to appear in Google Monitoring.
 
 Now we have our metrics we need to scale on working, we add the horizontal pod autoscaler bit to our seldon core manifest like below:
