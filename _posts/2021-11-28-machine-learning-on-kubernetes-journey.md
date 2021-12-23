@@ -47,7 +47,7 @@ spec:
 
 This allows us to use custom paths and redirect to the model v1 path, remember to always set the header to the transformer service, if there is one, not the predictor service like in this picture https://user-images.githubusercontent.com/6123106/122265361-52f9d400-cee1-11eb-8179-9ceb918c56f2.png
 
-We need to also set up Authz. Here is a page outlining examples https://istio.io/latest/docs/tasks/security/authorization/authz-http/. Here is the example AuthorisationPolicy we used for testing
+We need to also set up Authz. Here is a page outlining examples https://istio.io/latest/docs/tasks/security/authorization/authz-http/. Here is the example AuthorisationPolicy we used for testing.
 
 ```
 apiVersion: security.istio.io/v1beta1
