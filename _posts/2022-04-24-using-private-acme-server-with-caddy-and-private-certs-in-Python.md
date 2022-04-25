@@ -1,5 +1,3 @@
-
-
 ---
 layout: post
 title: "Using Private ACME server with Caddy and private certs in Python"
