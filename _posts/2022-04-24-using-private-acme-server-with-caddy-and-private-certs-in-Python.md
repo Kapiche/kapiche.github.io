@@ -40,7 +40,7 @@ We disable the HTTP challenge, so we have only the secure TLS alpn challenge.
 We can now use this Private ACME RA server for all the other supported acme clients https://smallstep.com/docs/tutorials/acme-protocol-acme-clients including Kubernetes cert-manager.
 
 We have our private certificates setup and working with Caddy, but the microservices that talk to the webservers need the private certificate in their certificate store in order to send verified TLS requests.
-We found a few old blog about using private certificates with python but they didn't quite work, either they were older blog articles or we must not have been doing something correctly. There is one issue raised in python requests library which made things a little more nuanced https://github.com/psf/requests/issues/2966. Basically you have to workaround the use of certifi and how it handles certificates. 
+We found a few old blog about using private certificates with Python but they didn't quite work, either they were older blog articles or we must not have been doing something correctly. There is one issue raised in Python requests library which made things a little more nuanced https://github.com/psf/requests/issues/2966. Basically you have to work around the use of certifi and how it handles certificates. 
 
 We build our microservices in containers so we had to add the ca certificate into the container and add the following environment variables
 
