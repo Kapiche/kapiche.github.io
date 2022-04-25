@@ -12,7 +12,7 @@ share: true
 
 
 Problem:
-In order to request or have automatic lets encrypt with Caddy you can either use HTTP-01 challenge, DNS challeng type or TLS ALPN challenge type. In order to use the HTTP or TLS challenge types you need to have your webserver publicly exposed on port 80 or 443. This worked for awhile but we saw a lot of bots and hack attempts, even though these servers were behind DDoS protection and bot protection services. So we needed something better, something that would take us forward in our zero trust journey. Zero trust network access, as we aren't really validating until we get to our webserver what or who is making the request, so we could do this better. We tried using DNS challenge type but the it required a service account key with pretty much full write access to a DNS zone, which kind of moves the threat vector instead of fixing it.
+In order to request or have automatic Let’s Encrypt with Caddy you can either use HTTP-01 challenge, DNS challenge type or TLS ALPN challenge type. In order to use the HTTP or TLS challenge types you need to have your webserver publicly exposed on port 80 or 443. This worked for a while but we saw many bots and hack attempts, even though these servers were behind DDoS protection and bot protection services. We needed something better, something that would take us forward in our zero trust journey. Zero trust network access, as we aren't really validating until we get to our webserver what or who is making the request, so we could do this better. We tried using the DNS challenge type but it required a service account key with pretty much full write access to a DNS zone, which moves the threat vector instead of fixing it.
 
 
 Solution:
