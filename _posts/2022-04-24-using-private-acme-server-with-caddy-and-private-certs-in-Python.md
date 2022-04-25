@@ -3,7 +3,7 @@
 ---
 layout: post
 title: "Using Private ACME server with Caddy and private certs in Python"
-description: "How to setup a private acme server to use with caddy and then setup Python to trust the private certificates"
+description: "How to setup a private acme server to use with Caddy and then set up Python to trust the private certificates"
 category: "Engineering"
 author: cam_parry
 tags: [Caddy, ACME, Security, Private Certificates, Zero Trust]
