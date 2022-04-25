@@ -36,7 +36,7 @@ We then configure Caddy to use the new private ACME server, instructions given h
     }
 ```
 
-We disable the http challenge, so we have only the secure tls alpn challenge.
+We disable the HTTP challenge, so we have only the secure TLS alpn challenge.
 We can now use this Private ACME RA server for all the other supported acme clients https://smallstep.com/docs/tutorials/acme-protocol-acme-clients including Kubernetes cert-manager.
 
 We have our private certificates setup and working with Caddy, but the microservices that talk to the webservers need the private certificate in their certificate store in order to send verified TLS requests.
