@@ -54,7 +54,7 @@ For our first detailed case, we will show you how to bring in Slack data and rep
 
 This is what we will endevour to setup.
 
-![Dataflow diagram](../images/Slack-blog-post-dataflow.png)
+![Dataflow diagram](../images/slack-blog-post-dataflow.png)
 
 So how do we set this up? We first set up a Slack App and add the bot to the channels we want to pull data from. We used these instructions from Slack here.
 We will need one app to pull the data from Slack, this bot gets added to the channels you want to pull data from. We then set up our Data Pipeline to retrieve the Slack data. We use Airbyte for this https://docs.airbyte.com/integrations/sources/slack/. We set up Airbyte ELT to pull the Slack data into an S3 bucket. We have set up both Airbyte and Kapiche to pull new files daily.
