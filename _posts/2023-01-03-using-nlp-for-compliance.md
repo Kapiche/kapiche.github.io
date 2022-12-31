@@ -4,7 +4,7 @@ title: "Using NLP for Security and Compliance"
 description: ""
 category: "Natural Language Processing"
 author: cam_parry
-tags: [Security, Compliance, Slack, Chatbots, SBOM, Risk Management]
+tags: [Security, Compliance, Slack, Chatbots, Risk Management]
 share: true
 ---
 
@@ -19,7 +19,7 @@ This is a two part blog series, where the main takeaways are NLP uses in Securit
 
 Below are some example use cases  / themes that might appear in your organisation.
 
-Themes: Wellbeing monitoring / duty of care
+**Theme Wellbeing monitoring / duty of care**
 
 Use case A.1: Company A sends out internal staff surveys to get a pulse check on staff, and they want to monitor for keywords appearing, as they have internal policies and risk 
 
@@ -29,22 +29,26 @@ Use case A.2: Company A also has an internal chat system using Slack, which they
 
 Use case B: A University provides a chat application to facilitate  student-faculty communication, regarding topics such as tutorials, lectures and general university lifestyle. The university has requirements around monitoring and reporting student wellbeing.
 
-Theme: Legal and Risk Reporting
+**Theme: Legal and Risk Reporting**
 
 Use case C: Company A provides a chatbot to customers as their first line of online support. They have reporting and legal requirements around chatbots e.g. staying within internal policy requirements, data being collected and stored. Whether the chatbot is complying with industry regulations e.g. in advertising, chatbots will need to be programmed to comply with the relevant regulations (in the UK, the Advertising Standards Authority’s CAP code).‎ 
 
 Use case D: Company B has HIPAA requirements to report on when any HIPAA related records appear in their systems as they have a third party BAA with a particular customer, typical systems are very good at finding and reporting on HIPAA records found in structured data but tooling around alerting on HIPAA data found in unstructured data is varied to none. Here we can use NLP to search and alert on all unstructured data in the company and alert if we find any that meets requirements.
 
-Theme: Security Incident Event Monitoring & Incident Management
+**Theme: Security Incident Event Monitoring & Incident Management**
 
 Use case D: Company A has security audit logs they store for long term audit requirements. They need to detect and report on specific events in a timely manner based on the company's security policies.
 
 Use case E: Company C writes up all of its incidents in an incident management tool, as well as posting updates to their status tooling, and creating tickets in their ticketing system. They want to be aware of any trends, consistent wording across incidents and poor messaging to customers. There are also various laws in countries around reporting incidents, particularly security incidents, sometimes having all the information being fed into one place to search on trends, can help lead to better reporting and using Use case D above, can see incidents happen or evolve with the notes alongside.
 
-Theme: Supply Chain Management
+**Theme: Supply Chain Management**
+
 Use case F: Company B generates Software Bill of materials on every release of both binaries and container images of all its microservices, which occur at least daily. It also generates SBOM of any major piece of software it runs e.g. Airbyte for every release they have. They want to know when or if a CVE appears in our output. They don't want to have to search through daily or wait for a breach to happen to know they were affected.
 
-There are well known platforms and services that can achieve some of the above, of course SIEM and threat hunting can do a lot of the above. Cloud Posture management or workload protection can achieve Use Case G, Chatbot platforms can achieve Use Case C and HR platforms or internal survey platforms can do bits of Use Case A. You have tools specialising in those different areas, and will often do a good job on showing you some high level stats, but what if I wanted to delve deeper into the why for any of the use cases above, or even better search across multiple data sources to see what patterns or compliance issues you are missing, then get alerted on them. We call the two features that solve the above use cases Alerting and Universal Search. We will mainly go over in detail Use Case B in this first part of the blog and then a follow up part 2, we will go over Use Case G as examples to break down how they work.
+There are well known platforms and services that can achieve some of the above, of course SIEM and threat hunting can do a lot of the above. Cloud Posture management or workload protection can achieve Use Case G, Chatbot platforms can achieve Use Case C and HR platforms or internal survey platforms can do bits of Use Case A. You have tools specialising in those different areas, and will often do a good job on showing you some high level stats, but what if I wanted to delve deeper into the why for any of the use cases above, or even better search across multiple data sources to see what patterns or compliance issues you are missing, then get alerted on them. 
+
+The two features that solve the above use cases in Kapiche are Alerting and Universal Search. 
+We will mainly go over in detail A.2 in this first part of the blog and then a follow up part 2, we will go over Use Case F as examples to break down how they work.
 
 For our first detailed case, we will show you how to bring in Slack data and report on emerging themes, which covers Use case A.2. These are topics of discussion that have appeared recently or substantially increased in frequency. We want to be automatically alerted to the occurrence themes we want to monitor e.g. staff wellbeing, swear words, we could also add some of our internal bullying policy as a theme. We do this so we don't have to manually look for them in the product each day, so it fits better into our operational workday. We are now more proactively monitoring our staff wellbeing and policy compliance, and hopefully de-risking the environment we work in. 
 
