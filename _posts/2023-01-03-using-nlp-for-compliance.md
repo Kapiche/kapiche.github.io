@@ -35,15 +35,17 @@ Use case C: Company A provides a chatbot to customers as their first line of onl
 
 Use case D: Company B has HIPAA requirements to report on when any HIPAA related records appear in their systems as they have a third party BAA with a particular customer, typical systems are very good at finding and reporting on HIPAA records found in structured data but tooling around alerting on HIPAA data found in unstructured data is varied to none. Here we can use NLP to search and alert on all unstructured data in the company and alert if we find any that meets requirements.
 
+Use case E: Company B has security policies, they want to make sure they are being upheld, so they combine all this information in a data warehouse with chat and support data and using NLP Semantic Search and Alerting, alerting can be configured to watch or continuously attest that we are adhering to policies.
+
 **Theme: Security Incident Event Monitoring & Incident Management**
 
-Use case D: Company A has security audit logs they store for long term audit requirements. They need to detect and report on specific events in a timely manner based on the company's security policies.
+Use case F: Company A has security audit logs they store for long term audit requirements. They need to detect and report on specific events in a timely manner based on the company's security policies.
 
-Use case E: Company C writes up all of its incidents in an incident management tool, as well as posting updates to their status tooling, and creating tickets in their ticketing system. They want to be aware of any trends, consistent wording across incidents and poor messaging to customers. There are also various laws in countries around reporting incidents, particularly security incidents, sometimes having all the information being fed into one place to search on trends, can help lead to better reporting and using Use case D above, can see incidents happen or evolve with the notes alongside.
+Use case G: Company C writes up all of its incidents in an incident management tool, as well as posting updates to their status tooling, and creating tickets in their ticketing system. They want to be aware of any trends, consistent wording across incidents and poor messaging to customers. There are also various laws in countries around reporting incidents, particularly security incidents, sometimes having all the information being fed into one place to search on trends, can help lead to better reporting and using Use case D above, can see incidents happen or evolve with the notes alongside.
 
 **Theme: Supply Chain Management**
 
-Use case F: Company B generates Software Bill of materials on every release of both binaries and container images of all its microservices, which occur at least daily. It also generates SBOM of any major piece of software it runs e.g. Airbyte for every release they have. They want to know when or if a CVE appears in our output. They don't want to have to search through daily or wait for a breach to happen to know they were affected.
+Use case H: Company B generates Software Bill of materials on every release of both binaries and container images of all its microservices, which occur at least daily. It also generates SBOM of any major piece of software it runs e.g. Airbyte for every release they have. They want to know when or if a CVE appears in our output. They don't want to have to search through daily or wait for a breach to happen to know they were affected.
 
 There are well known platforms and services that can achieve some of the above, of course SIEM and threat hunting can do a lot of the above. Cloud Posture management or workload protection can achieve Use Case G, Chatbot platforms can achieve Use Case C and HR platforms or internal survey platforms can do bits of Use Case A. You have tools specialising in those different areas, and will often do a good job on showing you some high level stats, but what if I wanted to delve deeper into the why for any of the use cases above, or even better search across multiple data sources to see what patterns or compliance issues you are missing, then get alerted on them. 
 
