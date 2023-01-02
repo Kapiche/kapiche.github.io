@@ -13,7 +13,7 @@ As companies gather more data and face increasing compliance and security requir
 
 Lately there has been a lot of hype around ChatGPT with some use cases around offensive security, but ChatGPT is public, so we can’t use private company data and we can’t easily dig further into the why with its current capabilities. This is where Kapiche can come in. Kapiche is a feedback analytics platform that analyses mountains of customer feedback in minutes, allowing you to provide deep insights quickly and help your company make better decisions.
 
-![Kapiche Overview](../images/Kapiche_Overview.png)
+![Kapiche Overview](/images/Kapiche_Overview.png)
 
 This is a two part blog series, where the main takeaways are Natural Language Processing (NLP) uses in Security and the help it can offer with operational use cases. I will take you through some use cases we have seen with customers, some we use internally at Kapiche “dogfooding” our own product. Finally we will cover some lesser known use cases / themes that you may not have thought of for NLP.
 
@@ -56,7 +56,7 @@ For our first detailed case, we will show you how to bring in Slack data and rep
 
 This is what we will endevour to setup.
 
-![Dataflow diagram](../images/slack-blog-post-dataflow.png)
+![Dataflow diagram](/images/slack-blog-post-dataflow.png)
 
 So how do we set this up? We first set up a Slack App and add the bot to the channels we want to pull data from. We used these instructions from Slack here.
 We will need one app to pull the data from Slack, this bot gets added to the channels you want to pull data from. We then set up our Data Pipeline to retrieve the Slack data. We use Airbyte for this https://docs.airbyte.com/integrations/sources/slack/. We set up Airbyte ELT to pull the Slack data into an S3 bucket. We have set up both Airbyte and Kapiche to pull new files daily.
@@ -65,13 +65,13 @@ The second Slack Application, which we get the bot token for is the Kapiche bot 
 Next we set up a theme to monitor.
 You will notice as we add terms, the ‘OR’ operator that we click on shows us synonyms. These are synonyms in the Slack dataset, so ‘Health’ has appeared 49 times and has a similarity score of .486, this score is based on a centroid of all the words currently in the query. This helps us build out more accurate themes and quicker. As a bonus we can also find misspelt words.
 
-![Synonyms](../images/ALL-Query-Kapiche-wellbeing-query.png)
+![Synonyms](/images/ALL-Query-Kapiche-wellbeing-query.png)
 
 Now that we have our theme, we are going to set up an alert, using the Kapiche Radar. Here we set which Themes we want to monitor and alert on. If we have setup slack notifications it will also show an alert in Slack.
 
-![Radar Themes](../images/ALL-Analysis-Kapiche-Radar.png)
+![Radar Themes](/images/ALL-Analysis-Kapiche-Radar.png)
 
-![Slack Alert](../images/Kapiche-Slack-Radar.png)
+![Slack Alert](/images/Kapiche-Slack-Radar.png)
 
 Now whenever new data gets added daily, our radar will monitor for verbatims/terms that match our theme and alert us, allowing us to be much more proactive with staff e.g. the above alerted us it found 16 new verbatims from the day before around the wellbeing of staff. We can then click on the “Explore” link and see what staff were saying and if it is anything we need to follow up about.
 
