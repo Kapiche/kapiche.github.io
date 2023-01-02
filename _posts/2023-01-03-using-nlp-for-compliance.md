@@ -11,11 +11,11 @@ share: true
 
 As companies gather more data and face increasing compliance and security requirements across disparate data sources, it can be challenging to meet these obligations. One way to address these challenges is through the use of Natural Language Processing (NLP) techniques, which can be applied in a variety of areas, including phishing identification, source code and vulnerability analysis, event detection and prediction, threat detection and hunting, malware analysis, risk management, and compliance.
 
-Lately there has been a lot of hype around ChatGPT with some use cases around offensive security, but ChatGPT is public, so we can’t use private company data and we can’t easily dig further into the why. This is where Kapiche can come in. Kapiche is a feedback analytics platform that analyses mountains of customer feedback in minutes, allowing you to provide deep insights quickly and help your company make better decisions.
+Lately there has been a lot of hype around ChatGPT with some use cases around offensive security, but ChatGPT is public, so we can’t use private company data and we can’t easily dig further into the why with its current capabilities. This is where Kapiche can come in. Kapiche is a feedback analytics platform that analyses mountains of customer feedback in minutes, allowing you to provide deep insights quickly and help your company make better decisions.
 
 ![Kapiche Overview](../images/Kapiche_Overview.png)
 
-This is a two part blog series, where the main takeaways are NLP uses in Security and the help it can bring to a lot of operational use cases. I will take you through some use cases we have seen with customers, some we use internally at Kapiche “dogfooding” our own product. Finally we will cover some lesser known use cases / themes that you may not have thought of for NLP.
+This is a two part blog series, where the main takeaways are Natural Language Processing (NLP) uses in Security and the help it can offer with operational use cases. I will take you through some use cases we have seen with customers, some we use internally at Kapiche “dogfooding” our own product. Finally we will cover some lesser known use cases / themes that you may not have thought of for NLP.
 
 Below are some example use cases  / themes that might appear in your organisation.
 
@@ -47,10 +47,10 @@ Use case G: Company C writes up all of its incidents in an incident management t
 
 Use case H: Company B generates Software Bill of materials on every release of both binaries and container images of all its microservices, which occur at least daily. It also generates SBOM of any major piece of software it runs e.g. Airbyte for every release they have. They want to know when or if a CVE appears in our output. They don't want to have to search through daily or wait for a breach to happen to know they were affected.
 
-There are well known platforms and services that can achieve some of the above, of course SIEM and threat hunting can do a lot of the above. Cloud Posture management or workload protection can achieve Use Case G, Chatbot platforms can achieve Use Case C and HR platforms or internal survey platforms can do bits of Use Case A. You have tools specialising in those different areas, and will often do a good job on showing you some high level stats, but what if I wanted to delve deeper into the why for any of the use cases above, or even better search across multiple data sources to see what patterns or compliance issues you are missing, then get alerted on them. 
+There are well known platforms and services that can achieve some of the above, of course SIEM and Threat Hunting can do a lot of the above. Cloud Posture management or Workload Protection can achieve Use Case G, Chatbot platforms can achieve Use Case C and HR platforms or internal survey platforms can do bits of Use Case A. You have tools specialising in those different areas, and will often do a very good job on showing you some high level stats, but what if I wanted to delve deeper into the why for any of the use cases above, or even better search across multiple data sources to see what patterns or compliance issues you are missing, then get alerted on them. 
 
 The two features that solve the above use cases in Kapiche are Alerting and Universal Search. 
-We will mainly go over in detail A.2 in this first part of the blog and then a follow up part 2, we will go over Use Case F as examples to break down how they work.
+We will mainly go over in detail A.2 in this first part of the blog and then a follow up part 2, we will go over Use Case H as examples to break down how they work.
 
 For our first detailed case, we will show you how to bring in Slack data and report on emerging themes, which covers Use case A.2. These are topics of discussion that have appeared recently or substantially increased in frequency. We want to be automatically alerted to the occurrence themes we want to monitor e.g. staff wellbeing, swear words, we could also add some of our internal bullying policy as a theme. We do this so we don't have to manually look for them in the product each day, so it fits better into our operational workday. We are now more proactively monitoring our staff wellbeing and policy compliance, and hopefully de-risking the environment we work in. 
 
