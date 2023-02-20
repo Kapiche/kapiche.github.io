@@ -13,7 +13,7 @@ In the [first part](https://engineering.kapiche.com/natural%20language%20process
 For this second part we will cover Use Case H which is related to software supply chain management, a hot topic at the moment.
 
 ---
-For a brief introduction to software supply chain security, here is a good overview with some deeper dives into supply chain attacks.
+> For a brief introduction to software supply chain security, here is a good overview with some deeper dives into supply chain attacks.
 https://blog.gitguardian.com/supply-chain-security-what-is-the-slsa-part-i/amp/
 ---
 
@@ -40,38 +40,36 @@ We also wanted to pull in Exploit Prediction Scoring System (EPSS) data to be ab
 All the different types of data that are sent to BigQuery get put into partitioned tables and in different datasets. Then we have a daily scheduled query to join all our BigQuery datasets and put the results in a new dataset. Next we use the SBOM scoring and codified policies to make sure we have valid SBOMs, then we pull in the vulnerability data and join it on the application or container image name (generally these are the same). After that we use data from EPSS to add a risk level. We add some other risk metadata around concerns such as whether a component is internal or external, whether components are signed or unsigned, whether we know the component’s provenance. 
 
 ---
-I must point out that we have a general strategy / policy that can’t always be adhered to, that is to use a new container image in one of our clusters, it needs to be signed and have provenance attached to it, as we have setup our [Gatekeeper Open Policy Agent](https://open-policy-agent.github.io/gatekeeper/website/docs/howto/) to only let container images run if they are from a known list and signed. Allowing only signed images requires extra setup, to call external data as shown [here](https://www.justinpolidori.it/posts/20220116_sign_images_with_cosign_and_verify_with_gatekeeper/) or use another policy controller from [sigstore](https://docs.sigstore.dev/policy-controller/overview/). We use a lot of the other examples as well from the Gatekeeper policy library, but those are the main two of interest for this topic. For this we often have to set up internal pipelines to sign these containers ourselves or get vendors to support this.
+> I must point out that we have a general strategy / policy that can’t always be adhered to, that is to use a new container image in one of our clusters, it needs to be signed and have provenance attached to it, as we have setup our [Gatekeeper Open Policy Agent](https://open-policy-agent.github.io/gatekeeper/website/docs/howto/) to only let container images run if they are from a known list and signed. Allowing only signed images requires extra setup, to call external data as shown [here](https://www.justinpolidori.it/posts/20220116_sign_images_with_cosign_and_verify_with_gatekeeper/) or use another policy controller from [sigstore](https://docs.sigstore.dev/policy-controller/overview/). We use a lot of the other examples as well from the Gatekeeper policy library, but those are the main two of interest for this topic. For this we often have to set up internal pipelines to sign these containers ourselves or get vendors to support this.
 ---
 
 So once it has all been Ingested in BigQuery, we can then "Analyze" it in [Kapiche](https://www.kapiche.com). Now first we have metadata about the CVEs that scanners think are affecting our applications we are running and we have the title and description information for these. This is where I guess having an NLP engine comes in handy. I can look at the top 20 concepts and construct what we call themes for each. We first build out basic themes that match the EPSS data, as we will use that as part of our risk matrix. Then we will use what's called the “Unmapped Verbatim'' section to see if there is anything we are missing. Once we have our themes all worked out, we set up to ingest from BigQuery nightly so it will pick up any new data and see if anything new matches. We then set up an export job to push back into BigQuery what we have found. We then have a google sheet datasource in BigQuery which is just a map of each of our applications and the categories/tags that apply to them. We then use  the daily export from Kapiche and the application map to join against the categories and we then have a new automated way of getting to what we actually think we are vulnerable to. We then expose this data for internal consumption through a nice BI dashboard and to publish our final VEX report with [vexctl](https://www.chainguard.dev/unchained/putting-vex-to-work). We can also see very early whether we need to put out a VDR. We then add a task to our weekly security check-in to go to our Kapiche analysis and check the “Unmapped Verbatims section, which tells us any new words that have not been included in any themes, so any words from titles or descriptions of vulnerabilities which are probably new vulnerabilities that have been picked up, that we have not mapped to Themes or Categories. We will also check the “Emerging Concepts'' section of the product, this is helpful, as it will show us segments that are emerging and have high frequencies within a certain time period. So we can see CVEs with high EPSS segment data that have tags like user interactions and network. 
 
 An added benefit of having this continual data going into Kapiche, is we can jump in and answer any high level questions on numbers and segments across all our microservices. Kapiche is very good at slicing and dicing the data, so we can generally answer any adhoc question of the data. 
 
-Here is one of our microservices ![Continous Integration, Continuous Deployment and Continous Attestation flows](/images/CI-SBOM-Analysis.png)
+Here is one of our microservices Continous Integration, Continuous Deployment and Continous Attestation flows ![Continous Integration, Continuous Deployment and Continous Attestation flows](/images/CI-SBOM-Analysis.png)
 
-Here is our ![DevSecOps ToolChain](/images/DevSecOps-Toolchain.jpg)
+
+Here is our DevSecOps ToolChain ![DevSecOps ToolChain](/images/DevSecOps-Toolchain.jpg)
+
 
 
 #### Future Work
 
 **Greater Context**
-
 We are also looking for ways to add more metadata or context to this story. We use Dependency Track, which we also upload our SBOM data to, this has more vulnerability datasources, so can often give more context. It's also a lot easier if we are given an SBOM from a vendor to upload and assess it, not that we are at that stage yet. We also have our policies in there around licenses and vulnerabilities much like we have in BigQuery. It tends to do a better job of component analysis or per service analysis, so we see a much more fine grained view. I have to find time to figure out how to export the information I want into the right format in BigQuery. This should give greater context to our analysis, then we can Share our results. I also want to share more of scripts we have done, even though most of what we have used is opensource, the key bits are the joining bits.
 
 **Machine Learning**
-
 We are looking to apply more software engineering and supply chain management principles to our Machine Learning (ML) images and workflows. We currently build container images from the ML models we use. This means we download from HuggingFace or our ML Model Registry at build time instead of downloading at runtime. Three benefits we get from this: we are signing and being very declarative on what ML model and version we are using; and this metadata gets included in our pipeline for analysis; and the third one is faster start up times for our ML services, as sometimes these models can get up to 8 GB in size. We also get the added bonuses of adding signing and provenance to our ML models, which is lacking severely and is a huge hole in the industry at the moment: most models people use are either in cloud buckets or on Huggingface. Machine learning models should be built like other artifacts and using principles that are developing in the software supply chain like signing, provenance, attestation. The models should be then stored in artifact stores.
 Another big area we are focusing on is ML image size: currently these can range from 2 GB to 5 GB, due to model size and tool bloat. For example, Nvidia drivers, pytorch, and then ML models on top. This can often mean many extra vulnerabilities to manage. One could use a cloud service to run models, but the problem still exists. I ran one of our models on Vertex AI and the image used came back with 271 vulnerabilities (11 High, 174 Medium) and it was still 2.7 GB. You need to make sure you are checking with your service providers what your Shared Responsibility Model is.
 
 
 **Integration**
-
 We are experimenting with a few [Chainguard images](https://edu.chainguard.dev/chainguard/chainguard-images/) for Python, Rust and tools like curl, kubectl etc. Expanding these out to be used in more services, especially Machine Learning images which I feel are very bloated.
 
 We are also experimenting with [OX Security](https://www.ox.security/) for their Pipeline Bill of Materials. This is more experimenting at this stage, to see what they pickup and more value add they can add to our current flow. The other big thing we are excited about at the moment is Open Software Supply Chain Attack Reference (OSC&R) which is definitely [worth the read](https://pbom.dev). It's basically the software supply chain equivalent of [MITTRE ATT&CK](https://attack.mitre.org/). 
 
 
 **ACKNOWLEDGEMENTS**
-
 Huge thanks to Walter Haydock for his analysis, blogging and forward thinking with EPSS. The Chainguard team for their analysis and pushing forward of this space and everyone else working either in or around supply chain security at the moment. It feels like there is a lot of good momentum.
 
