@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Using NLP for Security and Compliance - Implementing Software Supply Chain"
-description: "Using NLP in software supply chain pipeline"
+title: "Using NLP for Security and Compliance - Implementing Software Supply Chain Security"
+description: "Using NLP in software supply chain security pipeline"
 category: "Natural Language Processing"
 author: cam_parry
-tags: [Security, Compliance, Software Supply Chain, Risk Management]
+tags: [Security, Compliance, Software Supply Chain Security, Risk Management]
 share: true
 ---
 
@@ -14,8 +14,8 @@ For this second part we will cover Use Case H which is related to software suppl
 
 ---
 
-> 📝 For a brief introduction to software supply chain security, here is a good overview with some deeper dives into supply chain attacks.
-https://blog.gitguardian.com/supply-chain-security-what-is-the-slsa-part-i/amp/
+> 📝 For a brief introduction to [software supply chain security](https://www.redhat.com/en/topics/security/what-is-software-supply-chain-security). There is also a good overview with some deeper dives into [supply chain attacks](
+https://blog.gitguardian.com/supply-chain-security-what-is-the-slsa-part-i/amp/).
 
 
 *Use case H: Company B generates [Software Bill of Materials](https://www.cisa.gov/sbom) on every release of both binaries and container images of all its microservices, which occur at least daily. It also generates SBOM of any major piece of software it runs e.g. ELT Tool, Dependency Track for every release we use. They want to know when or if a CVE appears in the output. They don't want to have to search through daily or wait for a breach to happen to know they were affected.*
