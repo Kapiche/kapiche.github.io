@@ -68,7 +68,7 @@ Another big area we are focusing on is ML image size: currently these can range 
 
 We are experimenting with a few [Chainguard images](https://edu.chainguard.dev/chainguard/chainguard-images/) for Python, Rust and tools like curl, kubectl etc. Expanding these out to be used in more services, especially Machine Learning images which I feel are very bloated.
 
-We are also experimenting with [OX Security](https://www.ox.security/) for their Pipeline Bill of Materials. This is more experimenting at this stage, to see what they pickup and more value add they can add to our current flow. The other big thing we are excited about at the moment is Open Software Supply Chain Attack Reference (OSC&R) which is definitely worth the read https://pbom.dev, it's basically the software supply chain equivalent of [MITTRE ATT&CK](https://attack.mitre.org/). 
+We are also experimenting with [OX Security](https://www.ox.security/) for their Pipeline Bill of Materials. This is more experimenting at this stage, to see what they pickup and more value add they can add to our current flow. The other big thing we are excited about at the moment is Open Software Supply Chain Attack Reference (OSC&R) which is definitely [worth the read](https://pbom.dev). It's basically the software supply chain equivalent of [MITTRE ATT&CK](https://attack.mitre.org/). 
 
 
 **ACKNOWLEDGEMENTS**
