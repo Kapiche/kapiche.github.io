@@ -10,7 +10,7 @@ share: true
 
 
 In the [first part](https://engineering.kapiche.com/natural%20language%20processing/using-nlp-for-compliance/) of this blog post series, we went over some use cases for using NLP for Security and Compliance. You can refer back to the first blog post to see the full list of use cases.
-For this second part we will cover Use case H which is related to software supply chain management, a hot topic at the moment.
+For this second part we will cover Use Case H which is related to software supply chain management, a hot topic at the moment.
 
 ---
 For a brief introduction to software supply chain security, here is a good overview with some deeper dives into supply chain attacks.
