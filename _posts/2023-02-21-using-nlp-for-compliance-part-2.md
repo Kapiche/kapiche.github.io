@@ -59,19 +59,23 @@ Here is our DevSecOps ToolChain ![DevSecOps ToolChain](/images/DevSecOps-Toolcha
 #### Future Work
 
 **Greater Context**
+
 We are also looking for ways to add more metadata or context to this story. We use Dependency Track, which we also upload our SBOM data to, this has more vulnerability datasources, so can often give more context. It's also a lot easier if we are given an SBOM from a vendor to upload and assess it, not that we are at that stage yet. We also have our policies in there around licenses and vulnerabilities much like we have in BigQuery. It tends to do a better job of component analysis or per service analysis, so we see a much more fine grained view. I have to find time to figure out how to export the information I want into the right format in BigQuery. This should give greater context to our analysis, then we can Share our results. I also want to share more of scripts we have done, even though most of what we have used is opensource, the key bits are the joining bits.
 
 **Machine Learning**
+
 We are looking to apply more software engineering and supply chain management principles to our Machine Learning (ML) images and workflows. We currently build container images from the ML models we use. This means we download from HuggingFace or our ML Model Registry at build time instead of downloading at runtime. Three benefits we get from this: we are signing and being very declarative on what ML model and version we are using; and this metadata gets included in our pipeline for analysis; and the third one is faster start up times for our ML services, as sometimes these models can get up to 8 GB in size. We also get the added bonuses of adding signing and provenance to our ML models, which is lacking severely and is a huge hole in the industry at the moment: most models people use are either in cloud buckets or on Huggingface. Machine learning models should be built like other artifacts and using principles that are developing in the software supply chain like signing, provenance, attestation. The models should be then stored in artifact stores.
 Another big area we are focusing on is ML image size: currently these can range from 2 GB to 5 GB, due to model size and tool bloat. For example, Nvidia drivers, pytorch, and then ML models on top. This can often mean many extra vulnerabilities to manage. One could use a cloud service to run models, but the problem still exists. I ran one of our models on Vertex AI and the image used came back with 271 vulnerabilities (11 High, 174 Medium) and it was still 2.7 GB. You need to make sure you are checking with your service providers what your Shared Responsibility Model is.
 
 
 **Integration**
+
 We are experimenting with a few [Chainguard images](https://edu.chainguard.dev/chainguard/chainguard-images/) for Python, Rust and tools like curl, kubectl etc. Expanding these out to be used in more services, especially Machine Learning images which I feel are very bloated.
 
 We are also experimenting with [OX Security](https://www.ox.security/) for their Pipeline Bill of Materials. This is more experimenting at this stage, to see what they pickup and more value add they can add to our current flow. The other big thing we are excited about at the moment is Open Software Supply Chain Attack Reference (OSC&R) which is definitely [worth the read](https://pbom.dev). It's basically the software supply chain equivalent of [MITTRE ATT&CK](https://attack.mitre.org/). 
 
 
 **ACKNOWLEDGEMENTS**
+
 Huge thanks to Walter Haydock for his analysis, blogging and forward thinking with EPSS. The Chainguard team for their analysis and pushing forward of this space and everyone else working either in or around supply chain security at the moment. It feels like there is a lot of good momentum.
 
