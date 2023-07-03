@@ -80,13 +80,13 @@ Use secure infrastructure: This includes using secure cloud platforms, and imple
 
 ### Tools:
 
-https://github.com/leondz/garak/
-https://github.com/NVIDIA/NeMo-Guardrails/
-https://github.com/shreyar/guardrails
-https://github.com/woop/rebuff
-https://www.bearer.com/blog/devsecops-ai-openai
-https://github.com/Bearer/bearer
-https://www.robustintelligence.com/blog-posts/nemo-guardrails-early-look-what-you-need-to-know-before-deploying-part-1
+- https://github.com/leondz/garak/
+- https://github.com/NVIDIA/NeMo-Guardrails/
+- https://github.com/shreyar/guardrails
+- https://github.com/woop/rebuff
+- https://www.bearer.com/blog/devsecops-ai-openai
+- https://github.com/Bearer/bearer
+= https://www.robustintelligence.com/blog-posts/nemo-guardrails-early-look-what-you-need-to-know-before-deploying-part-1
 
 
 ### Helpful guides and articles
@@ -98,13 +98,13 @@ https://www.robustintelligence.com/blog-posts/nemo-guardrails-early-look-what-yo
 - **Responsible AI:** This blog from Unusual VC on [Whose responsibility is responsible AI?](https://www.unusual.vc/post/responsible-ai). In my opinion this is one of the areas that is not talked about enough. If you want to delve into this deeper, I encourage you to check out a good knowledge base built up here https://github.com/alexandrainst/responsible-ai
 
 
-https://danaepp.com/is-offensive-ai-going-to-be-a-problem-for-api-hackers
-https://vulcan.io/blog/ai-hallucinations-package-risk
-https://www-csoonline-com.cdn.ampproject.org/c/s/www.csoonline.com/article/643505/most-popular-generative-ai-projects-on-github-are-the-least-secure.html/amp/
-https://calypsoai.com/protecting-enterprise-against-the-dark-arts-of-large-language-models/
-https://calypsoai.com/how-to-talk-to-the-c-suite-about-ai-security/
-https://www.infosecurity-magazine.com/news/are-gpt-models-the-right-fit-for/
-https://developer.nvidia.com/blog/nvidia-ai-red-team-an-introduction/
+- https://danaepp.com/is-offensive-ai-going-to-be-a-problem-for-api-hackers
+- https://vulcan.io/blog/ai-hallucinations-package-risk
+- https://www-csoonline-com.cdn.ampproject.org/c/s/www.csoonline.com/article/643505/most-popular-generative-ai-projects-on-github-are-the-least-secure.html/amp/
+- https://calypsoai.com/protecting-enterprise-against-the-dark-arts-of-large-language-models/
+- https://calypsoai.com/how-to-talk-to-the-c-suite-about-ai-security/
+- https://www.infosecurity-magazine.com/news/are-gpt-models-the-right-fit-for/
+- https://developer.nvidia.com/blog/nvidia-ai-red-team-an-introduction/
 
 
 ### AI Vendor Risk Profiles, Risk Databases and Vulnerability Database
