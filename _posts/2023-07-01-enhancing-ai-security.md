@@ -99,14 +99,16 @@ In addition to following the security standards and frameworks mentioned above, 
 - **Responsible AI:** This blog from Unusual VC on [Whose responsibility is responsible AI?](https://www.unusual.vc/post/responsible-ai). In my opinion this is one of the areas that is not talked about enough. If you want to delve into this deeper, I encourage you to check out a good knowledge base built up here https://github.com/alexandrainst/responsible-ai
 
 
-- https://danaepp.com/is-offensive-ai-going-to-be-a-problem-for-api-hackers
-- https://vulcan.io/blog/ai-hallucinations-package-risk
-- https://www-csoonline-com.cdn.ampproject.org/c/s/www.csoonline.com/article/643505/most-popular-generative-ai-projects-on-github-are-the-least-secure.html/amp/
-- https://calypsoai.com/protecting-enterprise-against-the-dark-arts-of-large-language-models/
-- https://calypsoai.com/how-to-talk-to-the-c-suite-about-ai-security/
-- https://www.infosecurity-magazine.com/news/are-gpt-models-the-right-fit-for/
-- https://developer.nvidia.com/blog/nvidia-ai-red-team-an-introduction/
-- https://www.conveyor.com/blog/4-vendor-security-risk-assessment-questions-to-ask-companies-using-artificial-intelligence-ai-in-their-software
+- [Manage Generative AI Risk Before It Manages You](https://www.informationweek.com/ai-or-machine-learning/manage-generative-ai-risk-before-it-manages-you#)
+- [Is Offensive AI Going to be a Problem for API Hackers?](https://danaepp.com/is-offensive-ai-going-to-be-a-problem-for-api-hackers)
+- [Can you trust ChatGPT’s package recommendations?](https://vulcan.io/blog/ai-hallucinations-package-risk)
+- [Most popular generative AI projects on GitHub are the least secure](https://www-csoonline-com.cdn.ampproject.org/c/s/www.csoonline.com/article/643505/most-popular-generative-ai-projects-on-github-are-the-least-secure.html/amp/)
+- [ExplAIning the Risk: Exploring the Large Language Models Open-Source Security Landscape](https://info.rezilion.com/explaining-the-risk-exploring-the-large-language-models-open-source-security-landscape)
+- [Protecting Enterprise Against the Dark Arts of Large Language Models](https://calypsoai.com/protecting-enterprise-against-the-dark-arts-of-large-language-models/)
+- [How to Talk to the C-Suite About AI Security](https://calypsoai.com/how-to-talk-to-the-c-suite-about-ai-security/)
+- [Are GPT-Based Models the Right Fit for AI-Powered Cybersecurity?](https://www.infosecurity-magazine.com/news/are-gpt-models-the-right-fit-for/)
+- [NVIDIA AI Red Team: An Introduction](https://developer.nvidia.com/blog/nvidia-ai-red-team-an-introduction/)
+- [4 vendor security risk assessment questions to ask companies using Artificial Intelligence (AI) in their software](https://www.conveyor.com/blog/4-vendor-security-risk-assessment-questions-to-ask-companies-using-artificial-intelligence-ai-in-their-software)
 
 
 ### AI Vendor Risk Profiles, Risk Databases and Vulnerability Database
