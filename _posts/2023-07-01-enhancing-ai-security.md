@@ -63,10 +63,10 @@ https://www.fairinstitute.org/blog/fair-cyber-risk-analysis-ai-exploiting-vulner
 
 If you are hosting a model on one of the cloud providers AI services or using their AI services, as always check the Shared Responsibility Model to see the boundaries. It is wise to use the cloud providers’ frameworks and suggestions as your North star to aim for. They are providing suggestions and frameworks for you to operate in, and they have usually thought about these issues carefully, and of course they will naturally evolve quickly as the AI landscape changes.
 
-- Google Cloud Secure AI: https://blog.google/technology/safety-security/introducing-googles-secure-ai-framework/
-- Microsoft: https://www.microsoft.com/en-us/research/publication/responsible-ai-maturity-model/
-- AWS: https://docs.aws.amazon.com/whitepapers/latest/aws-caf-for-ai/aws-caf-for-ai.html
-- Facebook: https://ai.facebook.com/blog/facebooks-five-pillars-of-responsible-ai/
+- **Google Cloud Secure AI:** https://blog.google/technology/safety-security/introducing-googles-secure-ai-framework/
+- **Microsoft:** https://www.microsoft.com/en-us/research/publication/responsible-ai-maturity-model/
+- **AWS:** https://docs.aws.amazon.com/whitepapers/latest/aws-caf-for-ai/aws-caf-for-ai.html
+- **Facebook:** https://ai.facebook.com/blog/facebooks-five-pillars-of-responsible-ai/
 
 
 ## General Security Best Practices for AI
@@ -113,9 +113,9 @@ In addition to following the security standards and frameworks mentioned above, 
 
 What we have so far in this area is going to be very helpful. It's going to be interesting to see how this work feeds into supply chain work. For me AI, ML it's just another albeit special area of software engineering so we should aim for NIST SSDF for AI / ML engineering as well and as I've touched on before the below are just data points to help you along the way.
 
-https://airisk.io/
-https://avidml.org/
-https://www.credo.ai/ai-vendor-directory
+- https://airisk.io/
+- https://avidml.org/
+= https://www.credo.ai/ai-vendor-directory
 
 
 
