@@ -1,4 +1,4 @@
-FROM ruby:3.2.2
+FROM ruby:3.3.4
 
 # Set default locale for the environment
 ENV LC_ALL C.UTF-8
