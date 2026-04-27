@@ -1,4 +1,4 @@
-FROM ruby:4.0.2@sha256:807b8f3d32280ca472bbc0a270fb34672c65e82c4096b84252894596b36e530f
+FROM ruby:4.0.3@sha256:ebd9bbec4962e1ed9ae266b6dd89fe183a6f748ef71ddbfd76994e91f13f62ad
 
 # Set default locale for the environment
 ENV LC_ALL C.UTF-8
